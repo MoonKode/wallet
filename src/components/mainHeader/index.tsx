@@ -15,7 +15,7 @@ const MainHeader: React.FC = () => {
     },[])
     return (
         <Container>
-            <Toggle></Toggle>
+            <Toggle />
             <Profile>
                 <Welcome>Olá, {emoji} </Welcome>
                 <UserName>Joao Martins</UserName>
