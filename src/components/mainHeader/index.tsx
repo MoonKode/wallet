@@ -1,4 +1,5 @@
 import React, {useMemo} from 'react'
+import Toggle from '../toggle'
 import{Container, 
     Profile, 
     Welcome, 
@@ -13,7 +14,7 @@ const MainHeader: React.FC = () => {
     },[])
     return (
         <Container>
-            <h1>ToggleButton</h1>
+            <Toggle></Toggle>
             <Profile>
                 <Welcome>Olá, {emoji} </Welcome>
                 <UserName>Joao Martins</UserName>
