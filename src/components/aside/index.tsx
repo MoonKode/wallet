@@ -35,7 +35,7 @@ const Aside: React.FC = () => {
                 </MenuItemLink>
                 <MenuItemLink href='#'>
                     <MdArrowDownward />
-                    Outcome
+                    OutGoings
                 </MenuItemLink>
                 <MenuItemLink href='#'>
                     <MdExitToApp/>

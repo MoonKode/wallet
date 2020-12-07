@@ -4,17 +4,28 @@ import {
     TitleContainer,
     Controllers,
 } from './styles'
+import SelectInput from '../SelectInput'
 
+interface IContentHeaderProps {
+    title: string;
+    lineColor: string;
+    children: React.ReactNode;
+}
 
-const ContentHeader: React.FC = () => {
+const ContentHeader: React.FC<IContentHeaderProps> = (
+    {
+        title, lineColor, children }
+) => {
+
+    
+  
     return (
-        <Container>
-            <TitleContainer>
-                <h1>Title</h1>
+        <Container >
+            <TitleContainer lineColor = {lineColor}>
+                <h1>{title}</h1>
             </TitleContainer>
             <Controllers>
-                <button type="button">Button A</button>
-                <button type="button">Button B</button>
+               {children}
             </Controllers>
         </Container>
     )
