@@ -1,9 +1,10 @@
-import React, {useMemo} from 'react'
+import React, {useMemo, useState, useEffect} from 'react'
 import {Container, Content, Filters} from './styles'
 import ContentHeader from '../../components/ContentHeader'
 import SelectInput from '../../components/SelectInput'
 import HistoryFinanceCard from '../../components/HistoryFinanceCard'
-
+import gains from '../../repositories/gains'
+import expenses from '../../repositories/expenses'
 
 interface IRouteParams {
     match: {
@@ -13,9 +14,28 @@ interface IRouteParams {
     }
 }
 
-const List: React.FC<IRouteParams> = ({match}) => {
+interface IData {
+    description: string;
+    amountFormatted: string;
+    type: string;
+    frequency: string;
+    dateFormatted: string;
+    tagColor: string;
+}
 
-    const {type} = match.params
+const List: React.FC<IRouteParams> = ({ match }) => {
+
+    useEffect(() => {
+       
+    }, [])
+    
+    const [data, setdata] = useState<IData>([])
+
+
+    const { type } = match.params
+    const listData = useMemo(() => {
+        return type === 'entry-balance' ? gains : expenses
+    }, [type])
     const title = useMemo(() => {
         return type === 'entry-balance' ? "Income" : "OutGoings"
     }, [type])
