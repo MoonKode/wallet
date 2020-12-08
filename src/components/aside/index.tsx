@@ -22,24 +22,24 @@ const Aside: React.FC = () => {
         <Container>
             <Header>
                 <LogoImg src={logoImg} alt="Logo MyWallet" />
-                <Title>My Wallet</Title>
+                <Title>Minhas Finanças</Title>
             </Header>
             <MenuContainer>
                 <MenuItemLink href="/dashboard">
                 <MdDashboard />
-                    Dashboard
+                    Gráficos
                 </MenuItemLink>
                 <MenuItemLink href="/list/entry-balance">
                     <MdArrowUpward />
-                    Income
+                    Ganhos
                 </MenuItemLink>
                 <MenuItemLink href='/list/exit-balance'>
                     <MdArrowDownward />
-                    OutGoings
+                    Despesas
                 </MenuItemLink>
                 <MenuItemLink href='#'>
                     <MdExitToApp/>
-                    Quit
+                    Sair
                 </MenuItemLink>
 
             </MenuContainer>
