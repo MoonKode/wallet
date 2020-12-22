@@ -31,8 +31,8 @@ const List: React.FC<IRouteParams> = ({ match }) => {
 
     //State
     const [data, setdata] = useState<IData[]>([])
-    const [monthSelected, setmonthSelected] = useState<string>(String(new Date().getMonth() +1))
-    const [yearSelected, setyearSelected] = useState<string>(String(new Date().getFullYear()))
+    const [monthSelected, setmonthSelected] = useState<number>(new Date().getMonth() +1)
+    const [yearSelected, setyearSelected] = useState<number>(new Date().getFullYear())
     const [frequencyFilterSelected, setfrenquencyFilterSelected] = useState<string[]>(['recorrente', 'eventual'])
     //route params
     const balanceType  = match.params.type
@@ -84,15 +84,37 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         })
        
     }, [])
+   
+    const handleMonthSelected = (month: string) => {
+        try {
+            const parseMonth = Number(month)
+            setmonthSelected(parseMonth)
+        } catch (error) { 
+            throw new Error('invalid month value. Accepted values: 1 - 12')
+
+        }
+    } 
     
+
+    const handleYearSelected = (year: string) => {
+        try {
+            const parseYear = Number(year)
+            setyearSelected(parseYear)
+        } catch (error) { 
+            throw new Error('invalid year value. Only integers accepted')
+
+        }
+    }    
+
+
     useEffect(() => {
 
         const { data } = pageData
         
         const filteredData = data.filter(item => {
             const date = new Date(item.date);
-            const month = String(date.getMonth() + 1);
-            const year = String(date.getFullYear());
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
 
             return month === monthSelected && year === yearSelected && frequencyFilterSelected.includes(item.frequency);
         })
@@ -125,6 +147,8 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             setfrenquencyFilterSelected((prev) => [...prev, frequency])
         }
     }
+
+    
     
     return (
         <Container>
@@ -134,12 +158,12 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             >
                 <SelectInput
                     options={months}
-                    onChange={(e) => setmonthSelected(e.target.value)}
+                    onChange={(e) => handleMonthSelected(e.target.value)}
                     defaultValue={monthSelected}
                 />
                 <SelectInput
                     options={years}
-                    onChange={(e) => setyearSelected(e.target.value)}
+                    onChange={(e) => handleYearSelected(e.target.value)}
                     defaultValue={yearSelected}
                 />
             </ContentHeader>
