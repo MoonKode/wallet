@@ -42,7 +42,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         return balanceType === 'entry-balance' ?
             {
                 title: 'Ganhos',
-                lineColor: "#F7931B",
+                lineColor: "#4E41F0",
                 data: gains,
             }
             :
