@@ -3,11 +3,15 @@ import React, { useState, useMemo } from 'react'
 import ContentHeader from '../../components/ContentHeader'
 import SelectInput from '../../components/SelectInput'
 import WalletBox from '../../components/WalletBox'
+import MessageBox from '../../components/MessageBox'
 
 
 import expenses from '../../repositories/expenses'
 import gains from '../../repositories/gains'
 import listOfMonths from '../../utils/months'
+
+import happyImg from '../../assets/happy.svg'
+import sadImg from '../../assets/sad.svg'
 
 import {
     Container,
@@ -114,6 +118,12 @@ const Dashboard: React.FC = () => {
                     footerText="Atualizado com base nos ganhos e nas despesas"
                     icon="arrowDown"
                     color="#E44C4E"
+                />
+                <MessageBox
+                    title='Muito Bem!'
+                    description='O seu saldo está positivo'
+                    icon={happyImg}
+                    footerText='Continue assim! Considere investir o seu saldo'
                 />
             </Content>
 
