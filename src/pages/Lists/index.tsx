@@ -89,7 +89,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         try {
             const parseMonth = Number(month)
             setmonthSelected(parseMonth)
-        } catch (error) { 
+        } catch { 
             throw new Error('invalid month value. Accepted values: 1 - 12')
 
         }
