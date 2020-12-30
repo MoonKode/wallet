@@ -1,12 +1,13 @@
 import React, { useState, useMemo } from 'react'
-
-import ContentHeader from '../../components/ContentHeader'
-import SelectInput from '../../components/SelectInput'
-import WalletBox from '../../components/WalletBox'
-import MessageBox from '../../components/MessageBox'
-import PieChartComponent from '../../components/PieChart'
-import HistoryBox from '../../components/HistoryBox'
-
+import {
+    ContentHeader,
+    SelectInput,
+    WalletBox,
+    MessageBox,
+    PieChartComponent,
+    HistoryBox,
+    BarChartBox,
+} from '../../components'
 
 import expenses from '../../repositories/expenses'
 import gains from '../../repositories/gains'
@@ -209,17 +210,26 @@ const Dashboard: React.FC = () => {
         })
 
         const total = amountEventual + amountRecurrent;
-        const percentEventual = Number((amountEventual / total) * 100); 
-        const percentRecurrent = Number((amountRecurrent / total) * 100); 
+        const percentEventual = Number(((amountEventual / total) * 100).toFixed(1)); 
+        const percentRecurrent = Number(((amountRecurrent / total) * 100).toFixed(1)); 
         
         return [
             {
-                name: "Recorreontes",
+                name: "Recorrentes",
                 amount: amountRecurrent,
+                percent: percentRecurrent,
+                color: '#F9731B'
+
+            },
+            {
+                name: "Eventuais",
+                amount: amountEventual,
+                percent: percentEventual,
+                color: '#E44C4E'
 
             }
         ]
-    }, [])
+    }, [monthSelected, yearSelected])
 
 
     // handlers
@@ -298,6 +308,9 @@ const Dashboard: React.FC = () => {
                     lineColorAmountGains="#F7931B"
                     lineColorAmoutExpenses="#E44C4E"
                 />
+                <BarChartBox />
+
+                
             </Content>
 
         </Container>

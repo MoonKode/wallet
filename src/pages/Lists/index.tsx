@@ -1,9 +1,11 @@
 import React, {useMemo, useState, useEffect} from 'react'
 import { Container, Content, Filters } from './styles'
 import { uuid } from 'uuidv4'
-import ContentHeader from '../../components/ContentHeader'
-import SelectInput from '../../components/SelectInput'
-import HistoryFinanceCard from '../../components/HistoryFinanceCard'
+import {
+    ContentHeader,
+    SelectInput,
+    HistoryFinanceCard,
+} from '../../components'
 import gains from '../../repositories/gains'
 import expenses from '../../repositories/expenses'
 import formatCurrency from '../../utils/formatCurrency'
