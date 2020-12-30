@@ -191,6 +191,37 @@ const Dashboard: React.FC = () => {
         })
     }, [yearSelected])
 
+    const relationExpensesRecurrentVersusEventual = useMemo(() => {
+        let amountRecurrent = 0
+        let amountEventual = 0
+        expenses.filter((expense) => {
+            const date = new Date(expense.date);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            return month === monthSelected && year === yearSelected;
+        }).forEach((expense) => {
+            if (expense.frequency === 'recorrente') {
+                return amountRecurrent += Number(expense.amount)
+            }
+            if (expense.frequency === 'eventual') {
+                return amountEventual += Number(expense.amount)
+            }
+        })
+
+        const total = amountEventual + amountRecurrent;
+        const percentEventual = Number((amountEventual / total) * 100); 
+        const percentRecurrent = Number((amountRecurrent / total) * 100); 
+        
+        return [
+            {
+                name: "Recorreontes",
+                amount: amountRecurrent,
+
+            }
+        ]
+    }, [])
+
+
     // handlers
     const handleMonthSelected = (month: string) => {
         try {
