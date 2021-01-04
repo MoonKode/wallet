@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 import {
     ContentHeader,
     SelectInput,
@@ -15,12 +15,12 @@ import listOfMonths from '../../utils/months'
 
 import happyImg from '../../assets/happy.svg'
 import sadImg from '../../assets/sad.svg'
+import ops from '../../assets/pensando.svg'
 
 import {
     Container,
     Content
 } from './styles'
-import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen'
 
 const Dashboard: React.FC = () => {
 
@@ -109,14 +109,35 @@ const Dashboard: React.FC = () => {
 
 
     const message = useMemo(() => {
-        if (totalBalance < 0) {
+        if (totalBalance < 0)
+        {
             return {
-                title:'Que triste !',
-                description:'Este mês você gastou mais do que deveria!',
+                title: 'Que triste !',
+                description: 'Este mês você gastou mais do que deveria!',
                 icon: sadImg,
-                footerText:'Verifique os seus gastos e tente cortar com algo desnecessário'
+                footerText: 'Verifique os seus gastos e tente cortar com algo desnecessário'
             }
-        } else {
+        }
+        else if (totalExpenses === 0 && totalWinnings === 0)
+        { 
+            return  {
+                title:'Ooops',
+                description:'Neste mês não há registos',
+                icon: ops,
+                footerText:'Por favor seleccione um mês diferente'
+            }
+        }
+        else if (totalBalance === 0)
+        {
+            return  {
+                title:'Ufa',
+                description:'Neste mês vocêgastou o mesmo que ganhou',
+                icon: sadImg,
+                footerText:'Tente ser mais moderado para a próxima'
+            }
+        }
+        else
+        {
             return  {
                 title:'Muito bem!',
                 description:'O seu saldo está positivo',
@@ -124,24 +145,24 @@ const Dashboard: React.FC = () => {
                 footerText:'Continue assim ! Considere investir o seu saldo!'
             }
         }
-    }, [totalBalance])
+    }, [totalBalance, totalWinnings, totalExpenses])
 
     const relaTionExpenserVersusGains = useMemo(() => {
         const total = totalWinnings + totalExpenses
-        const percentGains = (totalWinnings / total) * 100
-        const percentExpenses = (totalExpenses / total) * 100
+        const percentGains = Number(((totalWinnings / total) * 100).toFixed(1))
+        const percentExpenses = Number(((totalExpenses / total) * 100).toFixed(1))
       
        const data = [
            {
                name: "Ganhos",
                value: totalWinnings,
-               percent: Number(percentGains.toFixed(1)),
+               percent: percentGains ? percentGains : 0,
                color: "#F7931B"
            },
            {
                name: "Despesas",
                value: totalExpenses,
-               percent: Number(percentExpenses.toFixed(1)),
+               percent: percentExpenses ? percentExpenses : 0,
                color: "#E44C4E"
             },
        ]
@@ -217,14 +238,53 @@ const Dashboard: React.FC = () => {
             {
                 name: "Recorrentes",
                 amount: amountRecurrent,
-                percent: percentRecurrent,
+                percent: percentRecurrent ? percentRecurrent : 0,
                 color: '#F9731B'
 
             },
             {
                 name: "Eventuais",
                 amount: amountEventual,
-                percent: percentEventual,
+                percent: percentEventual ? percentEventual : 0,
+                color: '#E44C4E'
+
+            }
+        ]
+    }, [monthSelected, yearSelected])
+
+    const relationGainsRecurrentVersusEventual = useMemo(() => {
+        let amountRecurrent = 0
+        let amountEventual = 0
+        gains.filter((gain) => {
+            const date = new Date(gain.date);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            return month === monthSelected && year === yearSelected;
+        }).forEach((gain) => {
+            if (gain.frequency === 'recorrente') {
+                return amountRecurrent += Number(gain.amount)
+            }
+            if (gain.frequency === 'eventual') {
+                return amountEventual += Number(gain.amount)
+            }
+        })
+
+        const total = amountEventual + amountRecurrent;
+        const percentEventual = Number(((amountEventual / total) * 100).toFixed(1)); 
+        const percentRecurrent = Number(((amountRecurrent / total) * 100).toFixed(1)); 
+        
+        return [
+            {
+                name: "Recorrentes",
+                amount: amountRecurrent,
+                percent: percentRecurrent ? percentRecurrent : 0,
+                color: '#F9731B'
+
+            },
+            {
+                name: "Eventuais",
+                amount: amountEventual,
+                percent: percentEventual ? percentEventual : 0,
                 color: '#E44C4E'
 
             }
@@ -233,7 +293,7 @@ const Dashboard: React.FC = () => {
 
 
     // handlers
-    const handleMonthSelected = (month: string) => {
+    const handleMonthSelected = useCallback((month: string) => {
         try {
             const parseMonth = Number(month)
             setmonthSelected(parseMonth)
@@ -241,10 +301,10 @@ const Dashboard: React.FC = () => {
             throw new Error('invalid month value. Accepted values: 1 - 12')
 
         }
-    }
+    }, [])
 
 
-    const handleYearSelected = (year: string) => {
+    const handleYearSelected = useCallback((year: string) => {
         try {
             const parseYear = Number(year)
             setyearSelected(parseYear)
@@ -252,7 +312,7 @@ const Dashboard: React.FC = () => {
             throw new Error('invalid year value. Only integers accepted')
 
         }
-    }    
+    }, [])    
 
     
     
@@ -308,7 +368,14 @@ const Dashboard: React.FC = () => {
                     lineColorAmountGains="#F7931B"
                     lineColorAmoutExpenses="#E44C4E"
                 />
-                <BarChartBox />
+                <BarChartBox
+                    title="Despesas"
+                    data={relationExpensesRecurrentVersusEventual}
+                />
+                <BarChartBox
+                    title="Ganhos"
+                    data={relationGainsRecurrentVersusEventual}
+                />
 
                 
             </Content>
