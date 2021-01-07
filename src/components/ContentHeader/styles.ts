@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface ITitleContainerProps {
   lineColor: string
@@ -21,12 +21,10 @@ export const TitleContainer = styled.div<ITitleContainerProps>`
       color={lineColor}
       display:block;
       width: 55px;
-      border-bottom: 10px solid ${props => props.lineColor}
+      border-bottom: 10px solid ${(props) => props.lineColor}
     }
   }
 `;
 export const Controllers = styled.div`
     display: flex;
 `;
-
-

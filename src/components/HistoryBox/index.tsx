@@ -1,21 +1,22 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
+import React from 'react';
 import {
-    Container,
-    Header,
-    LegendContainer,
-    Legend,
-
-} from './styles'
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  CartesianGrid,
+  Tooltip,
+  XAxis,
+} from 'recharts';
 import {
-    ResponsiveContainer,
-    LineChart,
-    Line,
-    CartesianGrid,
-    Tooltip,
-    XAxis,
-} from 'recharts'
+  Container,
+  Header,
+  LegendContainer,
+  Legend,
 
-import formatCurrency from '../../utils/formatCurrency'
+} from './styles';
+
+import formatCurrency from '../../utils/formatCurrency';
 
 interface IHistoryBoxProps {
     data: {
@@ -29,57 +30,57 @@ interface IHistoryBoxProps {
 }
 
 const HistoryBox: React.FC<IHistoryBoxProps> = ({
-    data, lineColorAmountGains, lineColorAmoutExpenses, 
+  data, lineColorAmountGains, lineColorAmoutExpenses,
 }) => (
-        <Container>
-            <Header>
-                <h2>Histórico de saldo</h2>
-                <LegendContainer>
-                    <Legend color={lineColorAmountGains}>
-                        <div>{}</div>
-                        <span>Ganhos</span>
+  <Container>
+    <Header>
+      <h2>Histórico de saldo</h2>
+      <LegendContainer>
+        <Legend color={lineColorAmountGains}>
+          <div>{}</div>
+          <span>Ganhos</span>
 
-                    </Legend>
-                    <Legend color={lineColorAmoutExpenses}>
-                        <div>{}</div>
-                        <span>Despesas</span>
+        </Legend>
+        <Legend color={lineColorAmoutExpenses}>
+          <div>{}</div>
+          <span>Despesas</span>
 
-                    </Legend>
-                </LegendContainer>
-            </Header>
-        <ResponsiveContainer>
-            <LineChart data={data} margin={{top:10,right:20,bottom:10,left:20}}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#cecece" />
-                <XAxis dataKey="month" stroke="#cecece" />
-                <Tooltip formatter={(value) => formatCurrency(Number(value))} />
-                <Line
-                    type="monotone"
-                    dataKey="amountGain"
-                    name="Ganhos"
-                    stroke={lineColorAmountGains}
-                    strokeWidth={5}
-                    dot={{ r: 5 }}
-                    activeDot={{r:8}}
-                    
-                />
-                <Line
-                    type="monotone"
-                    dataKey="amountExpense"
-                    name="Despesas"
-                    stroke={lineColorAmoutExpenses}
-                    strokeWidth={5}
-                    dot={{ r: 5 }}
-                    activeDot={{r:8}}
-                    
-                />
+        </Legend>
+      </LegendContainer>
+    </Header>
+    <ResponsiveContainer>
+      <LineChart
+        data={data}
+        margin={{
+          top: 10, right: 20, bottom: 10, left: 20,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" stroke="#cecece" />
+        <XAxis dataKey="month" stroke="#cecece" />
+        <Tooltip formatter={(value) => formatCurrency(Number(value))} />
+        <Line
+          type="monotone"
+          dataKey="amountGain"
+          name="Ganhos"
+          stroke={lineColorAmountGains}
+          strokeWidth={5}
+          dot={{ r: 5 }}
+          activeDot={{ r: 8 }}
+        />
+        <Line
+          type="monotone"
+          dataKey="amountExpense"
+          name="Despesas"
+          stroke={lineColorAmoutExpenses}
+          strokeWidth={5}
+          dot={{ r: 5 }}
+          activeDot={{ r: 8 }}
+        />
 
+      </LineChart>
+    </ResponsiveContainer>
+  </Container>
 
-            </LineChart>
-        </ResponsiveContainer>
-    </Container>
+);
 
-)
-      
-
-
-export default HistoryBox
+export default HistoryBox;

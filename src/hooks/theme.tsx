@@ -1,7 +1,9 @@
-import React, { createContext, useState, useContext } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-expressions */
+import React, { createContext, useState, useContext } from 'react';
 
-import dark from "../styles/themes/dark";
-import light from "../styles/themes/light";
+import dark from '../styles/themes/dark';
+import light from '../styles/themes/light';
 
 interface ITheme {
   title: string;

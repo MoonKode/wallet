@@ -1,10 +1,11 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
+// eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div`
     width: 48%;
     height : 260px;
-    background-color: ${props => props.theme.colors.tertiary};
-    color: ${props => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.tertiary};
+    color: ${(props) => props.theme.colors.white};
     border-radius: 7px;
     margin: 10px 0;
     padding: 30px 20px;

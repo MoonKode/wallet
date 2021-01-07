@@ -1,13 +1,11 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const Container = styled.div`
     grid-area: AS;
     padding-left: 20px;
-    border-right: 1px solid ${props => props.theme.colors.gray};
-    background-color: ${props => props.theme.colors.secondary};
+    border-right: 1px solid ${(props) => props.theme.colors.gray};
+    background-color: ${(props) => props.theme.colors.secondary};
     `;
-
 
 export const Header = styled.header`
     height: 70px;
@@ -22,7 +20,7 @@ export const LogoImg = styled.img`
 
 export const Title = styled.h3`
 margin-left:20px;
-    color: ${props => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.white};
 `;
 
 export const MenuContainer = styled.nav`
@@ -34,7 +32,7 @@ export const MenuContainer = styled.nav`
 export const MenuItemLink = styled.a`
     display:flex;
     align-items:center;
-    color: ${props => props.theme.colors.info};
+    color: ${(props) => props.theme.colors.info};
     text-decoration: none;
     margin: 7px 0;
     transition: opacity .5s;

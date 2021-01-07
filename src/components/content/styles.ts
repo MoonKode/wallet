@@ -1,9 +1,10 @@
-import styled from 'styled-components'
+/* eslint-disable import/prefer-default-export */
+import styled from 'styled-components';
 
 export const Container = styled.div`
 grid-area: CT;
-color: ${props => props.theme.colors.white};
-background-color: ${props => props.theme.colors.primary};
+color: ${(props) => props.theme.colors.white};
+background-color: ${(props) => props.theme.colors.primary};
 padding: 25px;
 height: calc(100vh -70px);
 overflow-y: scroll;
@@ -12,13 +13,11 @@ overflow-y: scroll;
     width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    color: ${props => props.theme.colors.secondary};
+    color: ${(props) => props.theme.colors.secondary};
     border-radius: 10px;
 
 }
 ::-webkit-scrollbar-track {
-    color: ${props => props.theme.colors.tertiary};
+    color: ${(props) => props.theme.colors.tertiary};
 }
 `;
-
-
