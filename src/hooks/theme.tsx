@@ -32,7 +32,13 @@ const ThemeContext = createContext<IThemeContext>({} as IThemeContext);
 const ThemeProvider: React.FC = ({ children }) => {
   const [theme, settheme] = useState<ITheme>(dark);
   const toggleTheme = () => {
-    theme === dark ? settheme(light) : settheme(dark);
+    if (theme.title === 'light') {
+      settheme(dark);
+      localStorage.setItem('@my_wallet:theme', JSON.stringify(dark));
+    } else {
+      settheme(light);
+      localStorage.setItem('@my_wallet:theme', JSON.stringify(light));
+    }
   };
   return (
     <ThemeContext.Provider value={{ toggleTheme, theme }}>
