@@ -11,12 +11,16 @@ import PieChart from './PieChart';
 import SelectInput from './SelectInput';
 import Toggle from './Toggle';
 import WalletBox from './WalletBox';
+import Input from './input';
+import Button from './button';
 
 export {
   Aside,
   BarChartBox,
   Content,
+  Button,
   ContentHeader,
+  Input,
   HistoryBox,
   HistoryFinanceCard,
   Layout,

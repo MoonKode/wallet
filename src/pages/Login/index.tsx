@@ -1,11 +1,35 @@
-import React from 'react'
+import React from 'react';
 
-const Login: React.FC = () => {
-    return (
-        <h1>
-            Login
-        </h1>
-    )
-}
+import {
+  Container,
+  Logo,
+  Form,
+  FormTitle,
+} from './styles';
+import { Input, Button } from '../../components';
+import logoImg from '../../assets/logo.svg';
 
-export default Login
+const Login: React.FC = () => (
+  <Container>
+    <Logo>
+      <img src={logoImg} alt="My Wallet" />
+      <h2>Minha Carteira</h2>
+    </Logo>
+    <Form onSubmit={() => {}}>
+      <FormTitle>Entrar</FormTitle>
+      <Input
+        type="email"
+        required
+        placeholder="seu email"
+      />
+      <Input
+        type="password"
+        required
+        placeholder="password"
+      />
+      <Button type="submit">Entrar</Button>
+    </Form>
+  </Container>
+);
+
+export default Login;
