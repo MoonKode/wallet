@@ -45,3 +45,22 @@ export const MenuItemLink = styled.a`
         margin-right: 10px;
     }
 `;
+export const MenuItemButton = styled.button`
+    font-size: 16px;
+    border: none;
+    background:none;
+    display:flex;
+    align-items:center;
+    color: ${(props) => props.theme.colors.info};
+    text-decoration: none;
+    margin: 7px 0;
+    transition: opacity .5s;
+
+    &:hover {
+        opacity:.7;
+    }
+    >svg {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+`;

@@ -3,14 +3,12 @@
 /* eslint-disable default-case */
 import React from 'react';
 import CountUp from 'react-countup';
-
+import arrowDownImg from '../../assets/arrow-down.svg';
+import arrowUpImg from '../../assets/arrow-up.svg';
+import dollarImg from '../../assets/dollar.svg';
 import {
   Container,
 } from './styles';
-
-import dollarImg from '../../assets/dollar.svg';
-import arrowUpImg from '../../assets/arrow-up.svg';
-import arrowDownImg from '../../assets/arrow-down.svg';
 
 interface IWalletBoxProps {
     title: string;
@@ -41,9 +39,10 @@ const WalletBox: React.FC<IWalletBoxProps> = ({
     <Container color={color}>
       <span>{title}</span>
       <h1>
+        <strong>€ </strong>
         <CountUp
           end={amount}
-          prefix="€ "
+          prefix=""
           duration={2}
           separator="."
           decimal="."

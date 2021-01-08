@@ -11,38 +11,42 @@ import {
   LogoImg,
   MenuContainer,
   MenuItemLink,
+  MenuItemButton,
   Title,
-
 } from './styles';
 
 import logoImg from '../../assets/logo.svg';
+import { useAuth } from '../../hooks/auth';
 
-const Aside: React.FC = () => (
-  <Container>
-    <Header>
-      <LogoImg src={logoImg} alt="Logo MyWallet" />
-      <Title>Minhas Finanças</Title>
-    </Header>
-    <MenuContainer>
-      <MenuItemLink href="/dashboard">
-        <MdDashboard />
-        Gráficos
-      </MenuItemLink>
-      <MenuItemLink href="/list/entry-balance">
-        <MdArrowUpward />
-        Ganhos
-      </MenuItemLink>
-      <MenuItemLink href="/list/exit-balance">
-        <MdArrowDownward />
-        Despesas
-      </MenuItemLink>
-      <MenuItemLink href="#">
-        <MdExitToApp />
-        Sair
-      </MenuItemLink>
+const Aside: React.FC = () => {
+  const { logout } = useAuth();
+  return (
+    <Container>
+      <Header>
+        <LogoImg src={logoImg} alt="Logo MyWallet" />
+        <Title>Minhas Finanças</Title>
+      </Header>
+      <MenuContainer>
+        <MenuItemLink href="/">
+          <MdDashboard />
+          Gráficos
+        </MenuItemLink>
+        <MenuItemLink href="/list/entry-balance">
+          <MdArrowUpward />
+          Ganhos
+        </MenuItemLink>
+        <MenuItemLink href="/list/exit-balance">
+          <MdArrowDownward />
+          Despesas
+        </MenuItemLink>
+        <MenuItemButton onClick={logout}>
+          <MdExitToApp />
+          Sair
+        </MenuItemButton>
 
-    </MenuContainer>
-  </Container>
-);
+      </MenuContainer>
+    </Container>
+  );
+};
 
 export default Aside;
