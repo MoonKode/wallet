@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import Toggle from '../Toggle';
-
 import { useTheme } from '../../hooks/theme';
 
 import {

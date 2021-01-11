@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   MdDashboard,
   MdArrowUpward,
   MdArrowDownward,
   MdExitToApp,
+  MdClose,
+  MdMenu,
 } from 'react-icons/md';
 import {
   Container,
@@ -13,16 +15,34 @@ import {
   MenuItemLink,
   MenuItemButton,
   Title,
+  ToggleMenu,
+  ThemeToggleFooter,
 } from './styles';
-
+import { Toggle } from '..';
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
 
 const Aside: React.FC = () => {
   const { logout } = useAuth();
+  const { toggleTheme, theme } = useTheme();
+  const [isOpen, setisOpen] = useState<boolean>(false);
+  const [darkTheme, setdarkTheme] = useState(() => (theme.title === 'dark'));
+
+  const handleChangeTheme = () => {
+    setdarkTheme(!darkTheme);
+    toggleTheme();
+  };
+
+  const handleToggleMenu = () => {
+    setisOpen(!isOpen);
+  };
   return (
-    <Container>
+    <Container isOpen={isOpen}>
       <Header>
+        <ToggleMenu onClick={handleToggleMenu}>
+          {isOpen ? <MdClose /> : <MdMenu />}
+        </ToggleMenu>
         <LogoImg src={logoImg} alt="Logo MyWallet" />
         <Title>Minhas Finanças</Title>
       </Header>
@@ -45,6 +65,15 @@ const Aside: React.FC = () => {
         </MenuItemButton>
 
       </MenuContainer>
+
+      <ThemeToggleFooter isOpen={isOpen}>
+        <Toggle
+          labelLeft="Light"
+          labelRight="Dark"
+          checked={theme.title === 'dark'}
+          onChange={handleChangeTheme}
+        />
+      </ThemeToggleFooter>
     </Container>
   );
 };
